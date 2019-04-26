@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.HttpToolsLib", "Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj", "{5CF45210-5F2E-4218-BD59-AEE3F40BC369}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Demo.DotnetCore", "Xray.Demo.DotnetCore\Xray.Demo.DotnetCore.csproj", "{56E8B561-BFBB-4591-8F72-F597D8384014}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.ExtractLib", "Xray.Tools.ExtractLib\Xray.Tools.ExtractLib.csproj", "{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.ScriptEngine", "Xray.Tools.ScriptEngine\Xray.Tools.ScriptEngine.csproj", "{132B5899-9F2B-4EBC-B780-50F77BBA679E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.File", "Xray.Tools.File\Xray.Tools.File.csproj", "{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CF45210-5F2E-4218-BD59-AEE3F40BC369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF45210-5F2E-4218-BD59-AEE3F40BC369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF45210-5F2E-4218-BD59-AEE3F40BC369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF45210-5F2E-4218-BD59-AEE3F40BC369}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E8B561-BFBB-4591-8F72-F597D8384014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E8B561-BFBB-4591-8F72-F597D8384014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E8B561-BFBB-4591-8F72-F597D8384014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E8B561-BFBB-4591-8F72-F597D8384014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{132B5899-9F2B-4EBC-B780-50F77BBA679E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132B5899-9F2B-4EBC-B780-50F77BBA679E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{132B5899-9F2B-4EBC-B780-50F77BBA679E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{132B5899-9F2B-4EBC-B780-50F77BBA679E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32868A42-D4FB-413F-8617-DF288C735B32}
+	EndGlobalSection
+EndGlobal
