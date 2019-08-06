@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Text;
+using Xray.Tools.File;
 using Xray.Tools.HttpToolsLib;
 
 namespace Xray.Demo.DotnetCore
@@ -8,8 +10,12 @@ namespace Xray.Demo.DotnetCore
     {
         static void Main(string[] args)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Console.WriteLine(HttpMethod.HttpWork(new HttpInfo { URL = "http://2019.ip138.com/ic.asp",Encoding = Encoding.GetEncoding("gb2312") }).Html);
+            FileMethod.CopyDIr("d0", "dd");
+            //    var files = Directory.GetFiles("d0", "*.dll", SearchOption.AllDirectories);
+            //Console.WriteLine(String.Join("\n", FileMethod.GetFiles("d0")));
+            //Console.WriteLine("------------------------------------------------------");
+            //Console.WriteLine(String.Join("\n", files)); 
+            Console.WriteLine(  123);
             Console.ReadLine();
         }
     }

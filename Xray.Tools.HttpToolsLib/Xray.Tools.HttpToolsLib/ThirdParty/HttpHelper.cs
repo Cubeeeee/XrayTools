@@ -48,6 +48,7 @@ namespace Xray.Tools.HttpToolsLib
         {
             //返回参数
             HttpResult result = new HttpResult();
+            MemoryStream _stream = new MemoryStream();
             try
             {
                 #region 得到请求的response
@@ -60,7 +61,6 @@ namespace Xray.Tools.HttpToolsLib
                         result.CookieCollection = response.Cookies;
                     if (response.Headers["set-cookie"] != null)
                         result.Cookie = response.Headers["set-cookie"];
-                    MemoryStream _stream = new MemoryStream();
                     //GZIIP处理
                     if (response.ContentEncoding != null && response.ContentEncoding.Equals("gzip", StringComparison.InvariantCultureIgnoreCase))
                     {
@@ -105,9 +105,60 @@ namespace Xray.Tools.HttpToolsLib
             }
             catch (WebException ex)
             {
-                //这里是在发生异常时返回的错误信息
                 response = (HttpWebResponse)ex.Response;
-                result.Html = ex.Message;
+                if (!objhttpitem.IgnoreWebException)
+                {
+                    result.Html = ex.Message;
+                }
+                else
+                {
+                    try
+                    {
+                        //GZIIP处理
+                        if (response.ContentEncoding != null && response.ContentEncoding.Equals("gzip", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            //开始读取流并设置编码方式
+                            //new GZipStream(response.GetResponseStream(), CompressionMode.Decompress).CopyTo(_stream, 10240);
+                            //.net4.0以下写法
+                            _stream = GetMemoryStream(new GZipStream(response.GetResponseStream(), CompressionMode.Decompress));
+                        }
+                        else
+                        {
+                            //开始读取流并设置编码方式
+                            //response.GetResponseStream().CopyTo(_stream, 10240);
+                            //.net4.0以下写法
+                            _stream = GetMemoryStream(response.GetResponseStream());
+                        }
+                        byte[] RawResponse = _stream.ToArray();
+                        if (encoding == null)
+                        {
+                            Match meta = Regex.Match(Encoding.Default.GetString(RawResponse), "<meta([^<]*)charset=([^<]*)[\"']", RegexOptions.IgnoreCase);
+                            string charter = (meta.Groups.Count > 1) ? meta.Groups[2].Value.ToLower() : string.Empty;
+                            charter = charter.Replace("\"", "").Replace("'", "").Replace(";", "").Replace("iso-8859-1", "gbk");
+                            if (charter.Length > 2)
+                                encoding = Encoding.GetEncoding(charter.Trim());
+                            else
+                            {
+                                if (string.IsNullOrEmpty(response.CharacterSet))
+                                    encoding = Encoding.UTF8;
+                                else
+                                    encoding = Encoding.GetEncoding(response.CharacterSet);
+                            }
+                        }
+                        //获取Byte
+                        result.Html = encoding.GetString(RawResponse);
+                        RawResponse = null;
+                    }
+                    catch
+                    {
+
+                    }
+                    finally
+                    {
+                        result.Html = String.IsNullOrEmpty(result.Html) ? ex.Message : result.Html;
+                    }
+                }
+                //这里是在发生异常时返回的错误信息
                 if (response != null)
                 {
                     result.StatusCode = response.StatusCode;
@@ -179,6 +230,7 @@ namespace Xray.Tools.HttpToolsLib
             request.Referer = objhttpItem.Referer;
             //是否执行跳转功能
             request.AllowAutoRedirect = objhttpItem.Allowautoredirect;
+            request.AllowWriteStreamBuffering = true;
             //设置Post数据
             SetPostData(objhttpItem);
             //设置最大连接
@@ -333,6 +385,17 @@ namespace Xray.Tools.HttpToolsLib
     /// </summary>
     public class HttpItem
     {
+        public HttpItem(bool UseInitParm = false)
+        {
+            if (UseInitParm)
+            {
+                ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                Accept = "*/*";
+                UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
+            }
+        }
+        public HttpItem() { }
+        public bool IgnoreWebException { get; set; } = true;
         string _URL = string.Empty;
         /// <summary>
         /// 请求URL必须填写

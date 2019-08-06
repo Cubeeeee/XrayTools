@@ -75,7 +75,7 @@ namespace Xray.Tools.HttpToolsLib
                 }
                 using (HttpClient _httpClient = new HttpClient(new HttpClientHandler
                 {
-                    UseCookies = true,
+                    UseCookies = false,
                     AllowAutoRedirect = Httpinfo.Allowautoredirect,
                     AutomaticDecompression = DecompressionMethods.GZip,
                     UseProxy = !String.IsNullOrEmpty(Httpinfo.ProxyIp),
@@ -90,15 +90,15 @@ namespace Xray.Tools.HttpToolsLib
                     myRequest.Headers.Add("Accept", Httpinfo.Accept);
                     myRequest.Headers.Add("Cookie", Httpinfo.Cookie);
                     myRequest.Headers.Add("User-Agent", Httpinfo.UserAgent);
-                    myRequest.Headers.Add("Referer", String.IsNullOrEmpty(Httpinfo.Referer)  ? Httpinfo.URL: Httpinfo.Referer);
-                    myRequest.Headers.Add("Connection", Httpinfo.KeepAlive ?  "keep-alive": "close");
+                    myRequest.Headers.Add("Referer", String.IsNullOrEmpty(Httpinfo.Referer) ? Httpinfo.URL : Httpinfo.Referer);
+                    myRequest.Headers.Add("Connection", Httpinfo.KeepAlive ? "keep-alive" : "close");
                     //自定义头
                     foreach (var k in Httpinfo.Header.AllKeys)
                     {
                         myRequest.Headers.Add(k, Httpinfo.Header[k]);
                     }
                     //Get
-                    if (String.IsNullOrEmpty(Httpinfo.Postdata)&&Httpinfo.Method.ToUpper().Equals("GET"))
+                    if (String.IsNullOrEmpty(Httpinfo.Postdata) && Httpinfo.Method.ToUpper().Equals("GET"))
                     {
                         myRequest.Method = System.Net.Http.HttpMethod.Get;
                     }
@@ -114,14 +114,140 @@ namespace Xray.Tools.HttpToolsLib
 
 
                 result.StatusCode = res.StatusCode;
-                res.Headers?.ToList().ForEach(head=> {
-                    if(Enum.IsDefined(typeof(HttpRequestHeader),head.Key))
+                res.Headers?.ToList().ForEach(head =>
+                {
+                    if (Enum.IsDefined(typeof(HttpRequestHeader), head.Key))
                     {
-                        result.Header.Add((HttpRequestHeader)Enum.Parse(typeof(HttpRequestHeader), head.Key),String.Join(";",head.Value));
+                        result.Header.Add((HttpRequestHeader)Enum.Parse(typeof(HttpRequestHeader), head.Key), String.Join(";", head.Value));
                     }
                 });
                 if (res.Headers.Contains("Set-Cookie"))
-                    result.Cookie = String.Join(";",res.Headers.GetValues("Set-Cookie"));
+                    result.Cookie = String.Join(";", res.Headers.GetValues("Set-Cookie"));
+                using (Stream result_stream = res.Content.ReadAsStreamAsync().Result)
+                {
+                    if (res.Content.Headers.ContentEncoding.ToList().Exists(en => en.Equals("gzip", StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        _stream = HttpHelper.GetMemoryStream(new GZipStream(result_stream, CompressionMode.Decompress));
+                    }
+                    else
+                    {
+                        _stream = HttpHelper.GetMemoryStream(result_stream);
+                    }
+                }
+                //获取Byte
+                byte[] RawResponse = _stream.ToArray();
+                _stream.Close();
+                //是否返回Byte类型数据
+                if (Httpinfo.ResultType == ResultType.Byte)
+                    result.ResultByte = RawResponse;
+                //从这里开始我们要无视编码了
+                if (Httpinfo.Encoding == null)
+                {
+                    Match meta = Regex.Match(Encoding.Default.GetString(RawResponse), "<meta([^<]*)charset=([^<]*)[\"']", RegexOptions.IgnoreCase);
+                    string charter = (meta.Groups.Count > 1) ? meta.Groups[2].Value.ToLower() : string.Empty;
+                    charter = charter.Replace("\"", "").Replace("'", "").Replace(";", "").Replace("iso-8859-1", "gbk");
+                    if (charter.Length > 2)
+                        Httpinfo.Encoding = Encoding.GetEncoding(charter.Trim());
+                    else
+                    {
+                        Httpinfo.Encoding = Encoding.UTF8;
+                    }
+                }
+                //得到返回的HTML
+                result.Html = Httpinfo.Encoding.GetString(RawResponse);
+            }
+            catch (Exception ex)
+            {
+                result.Html = ex.Message;
+            }
+            finally
+            {
+                if (_stream != null)
+                {
+                    _stream.Close();
+                    _stream.Dispose();
+                    _stream = null;
+                }
+                if (res != null)
+                {
+                    res.Dispose();
+                    res = null;
+                }
+            }
+
+            return result;
+        }
+
+        public static HttpResult HttpWork(HttpItem httpItem)
+        {
+            return new HttpHelper().GetHtml(httpItem);
+        }
+        public static HttpResult HttpWork(HttpInfo Httpinfo, HttpClient client)
+        {
+            MemoryStream _stream = null;
+            HttpResponseMessage res = null;
+            IWebProxy webProxy = null;
+            HttpRequestMessage myRequest = new HttpRequestMessage();
+            HttpResult result = new HttpResult();
+            try
+            {
+                if (!String.IsNullOrEmpty(Httpinfo.ProxyIp))
+                {
+                    String ip = Httpinfo.ProxyIp;
+                    try
+                    {
+                        var arr = ip.Split(':');
+                        var port = Convert.ToInt32(arr[arr.Length - 1]);
+                        var address = ip.Replace(":" + port, String.Empty);
+                        webProxy = new WebProxy(address, port)
+                        {
+                            Credentials = new NetworkCredential(Httpinfo.ProxyUserName, Httpinfo.ProxyPwd)
+                        };
+                        arr = null;
+                        address = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("设置代理ip失败:{0}", ex.Message);
+                    }
+                }
+                //填充请求头
+                myRequest.RequestUri = new Uri(Httpinfo.URL);
+                myRequest.Headers.Add("Accept", Httpinfo.Accept);
+                myRequest.Headers.Add("Cookie", Httpinfo.Cookie);
+                myRequest.Headers.Add("User-Agent", Httpinfo.UserAgent);
+                myRequest.Headers.Add("Referer", String.IsNullOrEmpty(Httpinfo.Referer) ? Httpinfo.URL : Httpinfo.Referer);
+                myRequest.Headers.Add("Connection", Httpinfo.KeepAlive ? "keep-alive" : "close");
+                //自定义头
+                foreach (var k in Httpinfo.Header.AllKeys)
+                {
+                    myRequest.Headers.Add(k, Httpinfo.Header[k]);
+                }
+                //Get
+                if (String.IsNullOrEmpty(Httpinfo.Postdata) && Httpinfo.Method.ToUpper().Equals("GET"))
+                {
+                    myRequest.Method = System.Net.Http.HttpMethod.Get;
+                }
+                //Post
+                else
+                {
+                    myRequest.Content = new StringContent(Httpinfo.Postdata);
+                    myRequest.Method = System.Net.Http.HttpMethod.Post;
+                    myRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(Httpinfo.ContentType);
+                }
+                res = client.SendAsync(myRequest).Result;
+
+
+                result.StatusCode = res.StatusCode;
+                res.Headers?.ToList().ForEach(head =>
+                {
+                    if (Enum.IsDefined(typeof(HttpRequestHeader), head.Key))
+                    {
+                        result.Header.Add((HttpRequestHeader)Enum.Parse(typeof(HttpRequestHeader), head.Key), String.Join(";", head.Value));
+                    }
+                });
+                if (res.Headers.Contains("Set-Cookie"))
+                    result.Cookie = String.Join(";", res.Headers.GetValues("Set-Cookie"));
                 using (Stream result_stream = res.Content.ReadAsStreamAsync().Result)
                 {
                     if (res.Content.Headers.ContentEncoding.ToList().Exists(en => en.Equals("gzip", StringComparison.InvariantCultureIgnoreCase)))
@@ -177,12 +303,6 @@ namespace Xray.Tools.HttpToolsLib
 
             return result;
         }
-
-        public static HttpResult HttpWork(HttpItem httpItem)
-        {
-            return new HttpHelper().GetHtml(httpItem);
-        }
-
         /// <summary>
         /// 异步
         /// </summary>
@@ -253,12 +373,13 @@ namespace Xray.Tools.HttpToolsLib
                         myRequest.Method = System.Net.Http.HttpMethod.Post;
                         myRequest.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(Httpinfo.ContentType);
                     }
-                    res =await _httpClient.SendAsync(myRequest);
+                    res = await _httpClient.SendAsync(myRequest);
                 }
 
 
                 result.StatusCode = res.StatusCode;
-                res.Headers?.ToList().ForEach(head => {
+                res.Headers?.ToList().ForEach(head =>
+                {
                     if (Enum.IsDefined(typeof(HttpRequestHeader), head.Key))
                     {
                         result.Header.Add((HttpRequestHeader)Enum.Parse(typeof(HttpRequestHeader), head.Key), String.Join(";", head.Value));
@@ -379,7 +500,7 @@ namespace Xray.Tools.HttpToolsLib
         /// </summary>
         /// <param name="proxy"></param>
         /// <returns></returns>
-        public static bool CheckProxy(String proxy,String username = "",String password = "")
+        public static bool CheckProxy(String proxy, String username = "", String password = "")
         {
             var ip = proxy?.Split(':')?[0];
             return Convert.ToBoolean(HttpWork(new HttpItem

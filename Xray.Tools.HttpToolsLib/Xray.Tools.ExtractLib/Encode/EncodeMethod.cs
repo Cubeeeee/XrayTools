@@ -18,6 +18,7 @@
 #endregion
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
@@ -25,6 +26,8 @@ namespace Xray.Tools.ExtractLib.Encode
 {
     public class EncodeMethod
     {
+        static EncodeMethod() {
+        }
         #region HtmlEncoder
         /// <summary>
         /// html解码 泛型
@@ -67,6 +70,29 @@ namespace Xray.Tools.ExtractLib.Encode
         /// <param name="Str">待编码字符串</param>
         /// <param name="time">编码次数</param>
         /// <returns></returns>
+        public static String URLEncode<T>(T str, bool upper, int time = 1, String encodestr = "utf-8")
+        {
+            String Str = Convert.ToString(str);
+            if (String.IsNullOrEmpty(Str))
+            {
+                return String.Empty;
+            }
+            else
+            {
+                Str = Str.Trim();
+            }
+            for (int i = 0; i < time; i++)
+            {
+                Str = HttpUtility.UrlEncode(Str, System.Text.Encoding.GetEncoding(encodestr));
+            }
+            return upper? Str.ToUpper():Str.ToLower();
+        }
+        /// <summary>
+        /// URL编码
+        /// </summary>
+        /// <param name="Str">待编码字符串</param>
+        /// <param name="time">编码次数</param>
+        /// <returns></returns>
         public static String URLEncode<T>(T str, int time = 1, String encodestr = "utf-8")
         {
             String Str = Convert.ToString(str);
@@ -82,7 +108,7 @@ namespace Xray.Tools.ExtractLib.Encode
             {
                 Str = HttpUtility.UrlEncode(Str, System.Text.Encoding.GetEncoding(encodestr));
             }
-            return Str;
+            return  Str;
         }
         /// <summary>
         /// URL解码
@@ -210,5 +236,44 @@ namespace Xray.Tools.ExtractLib.Encode
             return decode;
         }
         #endregion
+
+        #region TimeSamp
+        public static long GetTimeSamp(DateTime time)
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            long timeStamp = (long)(DateTime.Now - startTime).TotalMilliseconds; // 相差毫秒数
+            return timeStamp;
+        }
+
+        public static DateTime GetDateTime(String date)
+        {
+            long jsTimeStamp = Convert.ToInt64(date);
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            DateTime dt = startTime.AddMilliseconds(jsTimeStamp);
+            return dt;
+        }
+        public static DateTime GetDateTime(long date)
+        {
+            long jsTimeStamp = date;
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            DateTime dt = startTime.AddMilliseconds(jsTimeStamp);
+            return dt;
+        }
+        #endregion
+
+        #region MD5
+        public static string MD5(string inputString)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] encryptedBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < encryptedBytes.Length; i++)
+            {
+                sb.AppendFormat("{0:x2}", encryptedBytes[i]);
+            }
+            return sb.ToString();
+        }
+        #endregion
+
     }
 }
