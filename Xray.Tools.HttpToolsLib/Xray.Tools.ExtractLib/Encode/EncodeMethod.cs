@@ -18,6 +18,8 @@
 #endregion
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -26,216 +28,37 @@ namespace Xray.Tools.ExtractLib.Encode
 {
     public class EncodeMethod
     {
-        static EncodeMethod() {
-        }
-        #region HtmlEncoder
-        /// <summary>
-        /// html解码 泛型
-        /// </summary>
-        /// <typeparam name="T">可以转换为String类型的对象</typeparam>
-        /// <param name="Str">待编码字符串</param>
-        /// <param name="time">编码次数</param>
-        /// <returns></returns>
-        public static String HtmlDecode<T>(T Str, int time = 1)
+        static Dictionary<EncodeType, Type> typesdic = new Dictionary<EncodeType, Type>();
+        static EncodeMethod()
         {
-            String str = Convert.ToString(Str);
-            for (int i = 0; i < time; i++)
-            {
-                str = HttpUtility.HtmlDecode(str);
-            }
-            return str;
+            var types = Assembly.GetExecutingAssembly().DefinedTypes.Where(dt=> dt.IsClass&&dt.IsGenericTypeDefinition && Array.Exists(dt.GetInterfaces(), t => t.GetGenericTypeDefinition() == typeof(IEncoder<>)));
+            
+            types?.ToList().ForEach(item=> {
+                EncodeType et = (item.GetCustomAttribute(typeof(EncodeTypeAttribute)) as EncodeTypeAttribute).encodetype;
+                if(et != EncodeType.None&& !typesdic.ContainsKey(et))
+                {
+                    typesdic.Add(et,item);
+                }
+            });
         }
-        /// <summary>
-        /// html解码 泛型
-        /// </summary>
-        /// <typeparam name="T">可以转换为String类型的对象</typeparam>
-        /// <param name="Str">待解码字符串</param>
-        /// <param name="time">解码次数</param>
-        /// <returns></returns>
-        public static String HtmlEncode<T>(T Str, int time = 1)
+
+        public static T Encode<T>(EncodeType encodeType, T str, object parm)
         {
-            String str = Convert.ToString(Str);
-            for (int i = 0; i < time; i++)
+            var encodertype = typesdic[encodeType];
+            if(encodertype == null)
             {
-                str = HttpUtility.HtmlEncode(str);
+                return str;
             }
-            return str;
+            return ((IEncoder<T>)Activator.CreateInstance(encodertype.MakeGenericType(typeof(T)))).Encode(str,parm);
         }
-        #endregion
 
         #region UrlEncode
-        /// <summary>
-        /// URL编码
-        /// </summary>
-        /// <param name="Str">待编码字符串</param>
-        /// <param name="time">编码次数</param>
-        /// <returns></returns>
-        public static String URLEncode<T>(T str, bool upper, int time = 1, String encodestr = "utf-8")
-        {
-            String Str = Convert.ToString(str);
-            if (String.IsNullOrEmpty(Str))
-            {
-                return String.Empty;
-            }
-            else
-            {
-                Str = Str.Trim();
-            }
-            for (int i = 0; i < time; i++)
-            {
-                Str = HttpUtility.UrlEncode(Str, System.Text.Encoding.GetEncoding(encodestr));
-            }
-            return upper? Str.ToUpper():Str.ToLower();
-        }
-        /// <summary>
-        /// URL编码
-        /// </summary>
-        /// <param name="Str">待编码字符串</param>
-        /// <param name="time">编码次数</param>
-        /// <returns></returns>
-        public static String URLEncode<T>(T str, int time = 1, String encodestr = "utf-8")
-        {
-            String Str = Convert.ToString(str);
-            if (String.IsNullOrEmpty(Str))
-            {
-                return String.Empty;
-            }
-            else
-            {
-                Str = Str.Trim();
-            }
-            for (int i = 0; i < time; i++)
-            {
-                Str = HttpUtility.UrlEncode(Str, System.Text.Encoding.GetEncoding(encodestr));
-            }
-            return  Str;
-        }
-        /// <summary>
-        /// URL解码
-        /// </summary>
-        /// <param name="Str">待编码字符串</param>
-        /// <param name="time">解码次数</param>
-        /// <returns></returns>
-        public static String URLDecode<T>(T str, int time = 1, String encodestr = "utf-8")
-        {
-            String Str = Convert.ToString(str);
-            if (String.IsNullOrEmpty(Str))
-            {
-                return String.Empty;
-            }
-            for (int i = 0; i < time; i++)
-            {
-                Str = HttpUtility.UrlDecode(Str, System.Text.Encoding.GetEncoding(encodestr));
-            }
-            return Str;
 
-        }
         #endregion
 
-        #region Unicode
-        /// <summary>
-        /// 标准unicode编码
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static string UnicodeEncode<T>(T Str)
-        {
-            String text = Convert.ToString(Str);
-            if (string.IsNullOrEmpty(text))
-            {
-                return string.Empty;
-            }
-            int len = text.Length;
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < len; i++)
-            {
-                builder.Append("\\u");
-                builder.Append(UShortToHex((ushort)text[i]));
-            }
-            return builder.ToString();
-        }
+    
 
-        public static string UnicodeDecode<T>(T Str)
-        {
-            String unicode = Convert.ToString(Str);
-            if (string.IsNullOrEmpty(unicode))
-            {
-                return string.Empty;
-            }
-            string[] ls = unicode.Split(new string[] { "\\u" }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder builder = new StringBuilder();
-            int len = ls.Length;
-            for (int i = 0; i < len; i++)
-            {
-                builder.Append(Convert.ToChar(ushort.Parse(ls[i], System.Globalization.NumberStyles.HexNumber)));
-            }
-            return builder.ToString();
-        }
 
-        private static char[] UShortToHex(ushort n)
-        {
-            int num;
-            char[] hex = new char[4];
-            for (int i = 0; i < 4; i++)
-            {
-                num = n % 16;
-
-                if (num < 10)
-                    hex[3 - i] = (char)('0' + num);
-                else
-                    hex[3 - i] = (char)('A' + (num - 10));
-
-                n >>= 4;
-            }
-            return hex;
-        }
-        #endregion
-
-        #region Base64
-        /// <summary>
-        /// Base64加密
-        /// </summary>
-        /// <param name="codeName">加密采用的编码方式</param>
-        /// <param name="source">待加密的明文</param>
-        /// <returns></returns>
-        public static string Base64Encode<T>( T Str, String encode = "utf-8")
-        {
-            String source = Convert.ToString(Str);
-            String base64str = String.Empty;
-            byte[] bytes =Encoding.GetEncoding(encode).GetBytes(source);
-            try
-            {
-                base64str = Convert.ToBase64String(bytes);
-            }
-            catch
-            {
-                base64str = source;
-            }
-            return base64str;
-        }
-
-        /// <summary>
-        /// Base64解密
-        /// </summary>
-        /// <param name="codeName">解密采用的编码方式，注意和加密时采用的方式一致</param>
-        /// <param name="result">待解密的密文</param>
-        /// <returns>解密后的字符串</returns>
-        public static string DecodeBase64<T>(T Str, String encode = "utf-8")
-        {
-            String result = Convert.ToString(Str);
-            string decode = "";
-            byte[] bytes = Convert.FromBase64String(result);
-            try
-            {
-                decode = Encoding.GetEncoding(encode).GetString(bytes);
-            }
-            catch
-            {
-                decode = result;
-            }
-            return decode;
-        }
-        #endregion
 
         #region TimeSamp
         public static long GetTimeSamp(DateTime time)
@@ -261,19 +84,6 @@ namespace Xray.Tools.ExtractLib.Encode
         }
         #endregion
 
-        #region MD5
-        public static string MD5(string inputString)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] encryptedBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(inputString));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < encryptedBytes.Length; i++)
-            {
-                sb.AppendFormat("{0:x2}", encryptedBytes[i]);
-            }
-            return sb.ToString();
-        }
-        #endregion
-
+     
     }
 }

@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Demo.DotnetCore", "Xra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.ExtractLib", "Xray.Tools.ExtractLib\Xray.Tools.ExtractLib.csproj", "{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.ScriptEngine", "Xray.Tools.ScriptEngine\Xray.Tools.ScriptEngine.csproj", "{132B5899-9F2B-4EBC-B780-50F77BBA679E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.ScriptEngine", "Xray.Tools.ScriptEngine\Xray.Tools.ScriptEngine.csproj", "{132B5899-9F2B-4EBC-B780-50F77BBA679E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.File", "Xray.Tools.File\Xray.Tools.File.csproj", "{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.File", "Xray.Tools.File\Xray.Tools.File.csproj", "{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.Microservices", "Xray.Tools.Microservices\Xray.Tools.Microservices.csproj", "{EA7ADEFA-EB84-493F-A54D-8BEE406DBCCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Demo.Dotnet", "Xray.Demo.Dotnet\Xray.Demo.Dotnet.csproj", "{F9ED2FC4-3859-4243-8D77-897204C5BFFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78AFB29D-FB15-4AB4-BB32-1A6322C507DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7ADEFA-EB84-493F-A54D-8BEE406DBCCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7ADEFA-EB84-493F-A54D-8BEE406DBCCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7ADEFA-EB84-493F-A54D-8BEE406DBCCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7ADEFA-EB84-493F-A54D-8BEE406DBCCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -280,7 +280,7 @@ namespace Xray.Tools.HttpToolsLib
         private void SetPostData(HttpItem objhttpItem)
         {
             //验证在得到结果时是否有传入数据
-            if (request.Method.Trim().ToLower().Contains("post"))
+            if (!String.IsNullOrEmpty(objhttpItem.Postdata)||Convert.ToBoolean(objhttpItem.PostdataByte?.Length>0))
             {
                 byte[] buffer = null;
                 //写入Byte类型
