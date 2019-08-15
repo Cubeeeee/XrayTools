@@ -7,7 +7,7 @@
     <Description>射线网络 脚本执行引擎 目前支持Js</Description>
     <PackageProjectUrl>http://www.nb-ray.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/a462247201/XrayTools</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
