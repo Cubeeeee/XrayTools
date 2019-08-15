@@ -1,5 +1,5 @@
 {
-  "NacosHost": "http://47.99.41.23:8081",
+  "NacosHost": "http://",
   "NacosApis": [
     {
       "Name": "GetConfig",
@@ -59,7 +59,7 @@
     }
   ],
   "Route": {
-    "address": "http://47.99.41.23:8088/dynagateway/save",
+    "address": "http://host/dynagateway/save",
     "routeinfo": {
       "filters": [
         {
