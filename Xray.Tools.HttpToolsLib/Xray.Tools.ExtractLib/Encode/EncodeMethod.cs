@@ -58,8 +58,6 @@ namespace Xray.Tools.ExtractLib.Encode
 
     
 
-
-
         #region TimeSamp
         public static long GetTimeSamp(DateTime time)
         {
