@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>nb-ray</Authors>
+    <Description>射线网络 脚本执行引擎 目前支持Js</Description>
+    <PackageProjectUrl>http://www.nb-ray.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/a462247201/XrayTools</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xray.Tools.ExtractLib
+﻿namespace Xray.Tools.ExtractLib.Encode
 {
     public enum EncodeType { None,RsaEncode,
         RsaDecode,

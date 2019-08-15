@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Web;
+using Xray.Tools.ExtractLib.Interfaces;
 
 namespace Xray.Tools.ExtractLib.Encode.Encoders
 {

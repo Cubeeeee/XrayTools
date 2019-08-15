@@ -1,9 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using Xray.Tools.ExtractLib.Encode;
-using Xray.Tools.File;
 using Xray.Tools.HttpToolsLib;
 
 namespace Xray.Demo.DotnetCore
@@ -12,7 +7,7 @@ namespace Xray.Demo.DotnetCore
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(EncodeMethod.Encode(Tools.ExtractLib.EncodeType.MD5Encode, "123", null));
+            Console.WriteLine(HttpMethod.FastMethod_HttpHelper("https://blog.csdn.net/qq_26712977"));
             Console.ReadKey();
         }
     }

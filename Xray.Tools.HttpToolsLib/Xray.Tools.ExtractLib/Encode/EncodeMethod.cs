@@ -20,9 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
+using Xray.Tools.ExtractLib.Interfaces;
 
 namespace Xray.Tools.ExtractLib.Encode
 {
@@ -52,11 +50,6 @@ namespace Xray.Tools.ExtractLib.Encode
             return ((IEncoder<T>)Activator.CreateInstance(encodertype.MakeGenericType(typeof(T)))).Encode(str,parm);
         }
 
-        #region UrlEncode
-
-        #endregion
-
-    
 
         #region TimeSamp
         public static long GetTimeSamp(DateTime time)
@@ -80,8 +73,14 @@ namespace Xray.Tools.ExtractLib.Encode
             DateTime dt = startTime.AddMilliseconds(jsTimeStamp);
             return dt;
         }
+        public static String GetTimeSamp()
+        {
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
+            long timeStamp = (long)(DateTime.Now - startTime).TotalMilliseconds; // 相差毫秒数
+            return Convert.ToString(timeStamp);
+        }
         #endregion
 
-     
+
     }
 }

@@ -7,12 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Xray.Tools.ExtractLib\Xray.Tools.ExtractLib.csproj" />
-    <ProjectReference Include="..\Xray.Tools.File\Xray.Tools.File.csproj" />
-    <ProjectReference Include="..\Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj" />
+    <PackageReference Include="Xray.Tools.HttpToolsLib" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

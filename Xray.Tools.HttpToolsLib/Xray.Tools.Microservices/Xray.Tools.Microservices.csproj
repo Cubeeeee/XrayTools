@@ -1,15 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>nb-ray</Authors>
+    <Company>nb-ray</Company>
+    <PackageProjectUrl>http://www.nb-ray.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/a462247201/XrayTools</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>射线网络 微服务帮助类库 目前支持使用Nacos的WebAPI进行服务治理</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj" />
+    <PackageReference Include="Xray.Tools.HttpToolsLib" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

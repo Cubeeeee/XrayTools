@@ -1,7 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageId>Xray.Tools.HttpToolsLib</PackageId>
+    <Version>1.0.2</Version>
+    <Authors>nb-ray</Authors>
+    <Company>nb-ray</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>射线网络Http请求相关工具库，集成HttpHelper，并支持HttpClient使用</Description>
+    <PackageProjectUrl>http://www.nb-ray.com</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/a462247201/XrayTools</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

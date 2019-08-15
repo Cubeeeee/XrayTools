@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using Xray.Tools.ExtractLib.Interfaces;
 
 namespace Xray.Tools.ExtractLib.Encode.Encoders
 {
