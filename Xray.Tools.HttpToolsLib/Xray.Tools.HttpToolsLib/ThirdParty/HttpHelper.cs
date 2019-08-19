@@ -278,7 +278,7 @@ namespace Xray.Tools.HttpToolsLib
         /// </summary>
         /// <param name="objhttpItem">Http参数</param>
         private void SetPostData(HttpItem objhttpItem)
-        {
+        { 
             //验证在得到结果时是否有传入数据
             if (!String.IsNullOrEmpty(objhttpItem.Postdata)||Convert.ToBoolean(objhttpItem.PostdataByte?.Length>0))
             {

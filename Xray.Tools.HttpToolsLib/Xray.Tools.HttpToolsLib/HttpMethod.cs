@@ -32,6 +32,7 @@ namespace Xray.Tools.HttpToolsLib
     public class HttpMethod
     {
         static String CheckUrl = $"http://{DateTime.Now.Year}.ip138.com/ic.asp";
+        static WebClient wclient = new WebClient();
         static HttpMethod()
         {
             GlobalHttpConfig.UpdateConfig();
@@ -511,24 +512,18 @@ namespace Xray.Tools.HttpToolsLib
                 ProxyPwd = password
             })?.Html.Contains(ip));
         }
+
         #endregion
 
         #region 文件下载
-        /// <summary>
-        /// 下载文件到指定地址
-        /// </summary>
-        /// <param name="url">下载地址</param>
-        /// <param name="savepath">保存地址</param>
-        /// <returns></returns>
-        public static bool DownLoadFile(String url, String savepath)
+        public static byte[] DownLoadFile(String url)
         {
-            if (String.IsNullOrEmpty(Path.GetExtension(savepath)))
-            {
-                return false;
-            }
-            WebClient webClient = new WebClient();
-            webClient.DownloadFile(url, savepath);
-            return File.Exists(savepath);
+            return wclient.DownloadData(url);
+        }
+        public static bool DownLoadFile(String url, String filename)
+        {
+            wclient.DownloadFile(url, filename);
+            return File.Exists(filename);
         }
         #endregion
     }

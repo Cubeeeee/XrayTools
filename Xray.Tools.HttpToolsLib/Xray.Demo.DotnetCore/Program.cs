@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xray.Tools.HttpToolsLib;
 
 namespace Xray.Demo.DotnetCore
@@ -7,7 +8,8 @@ namespace Xray.Demo.DotnetCore
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(HttpMethod.FastMethod_HttpHelper("https://blog.csdn.net/qq_26712977"));
+            //Console.WriteLine(SMTPHelper.SendEmail(useremail, username, pass,new List<string> { targeraddress}, null, body, subject));
+   
             Console.ReadKey();
         }
     }
