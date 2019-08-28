@@ -11,6 +11,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <OutputPath>D:\代码\C#\商安\新商安项目\通用型分布式云爬虫平台\ConcurrentSpiders\ConcurrentSpiders\DLL</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="SharpZipLib" Version="1.1.0" />
   </ItemGroup>

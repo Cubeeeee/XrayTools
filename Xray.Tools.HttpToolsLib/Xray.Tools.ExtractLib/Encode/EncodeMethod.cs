@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Xray.Tools.ExtractLib.Encode.Encoders;
 using Xray.Tools.ExtractLib.Interfaces;
 
 namespace Xray.Tools.ExtractLib.Encode
@@ -40,14 +41,47 @@ namespace Xray.Tools.ExtractLib.Encode
             });
         }
 
-        public static T Encode<T>(EncodeType encodeType, T str, object parm)
+        public static T Encode<T>(EncodeType encodeType, T str, object parm = null)
         {
             var encodertype = typesdic[encodeType];
             if(encodertype == null)
             {
                 return str;
             }
+            if(parm == null)
+            {
+                parm = CreateNewParm(encodeType);
+            }
             return ((IEncoder<T>)Activator.CreateInstance(encodertype.MakeGenericType(typeof(T)))).Encode(str,parm);
+        }
+
+        private static object CreateNewParm(EncodeType encodeType)
+        {
+            object parm = new object();
+            switch (encodeType)
+            {
+                case EncodeType.RsaEncode:
+                case EncodeType.RsaDecode:
+                    break;
+                case EncodeType.HtmlEncode:
+                case EncodeType.HtmlDecode:
+                    parm = 0;
+                    break;
+                case EncodeType.UrlEncode:
+                case EncodeType.UrlDecode:
+                    parm = new UrlEncodeParm();
+                    break;
+                case EncodeType.UnicodeEncode:
+                case EncodeType.UnicodeDecode:
+                    break;
+                case EncodeType.Base64Encode:
+                case EncodeType.Base64Decode:
+                    parm = "utf-8";
+                    break;
+                case EncodeType.MD5Encode:
+                    break;
+            }
+            return parm;
         }
 
 
@@ -55,7 +89,7 @@ namespace Xray.Tools.ExtractLib.Encode
         public static long GetTimeSamp(DateTime time)
         {
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
-            long timeStamp = (long)(DateTime.Now - startTime).TotalMilliseconds; // 相差毫秒数
+            long timeStamp = (long)(time - startTime).TotalMilliseconds; // 相差毫秒数
             return timeStamp;
         }
 

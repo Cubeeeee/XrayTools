@@ -9,11 +9,20 @@
     <RepositoryUrl>https://github.com/a462247201/XrayTools</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>射线网络 微服务帮助类库 目前支持使用Nacos的WebAPI进行服务治理</Description>
+    <Version>1.0.1</Version>
+    <PackageIconUrl>https://img-blog.csdnimg.cn/20190815154514477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2NzEyOTc3,size_16,color_FFFFFF,t_70</PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>D:\代码\C#\商安\新商安项目\通用型分布式云爬虫平台\ConcurrentSpiders\ConcurrentSpiders\DLL</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Xray.Tools.HttpToolsLib" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

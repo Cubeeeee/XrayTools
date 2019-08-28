@@ -38,7 +38,7 @@
       "Description": "创建一个服务",
       "Method": "POST",
       "Url": "/nacos/v1/ns/service",
-      "Parms": "serviceName={0}&namespaceId={1}&healthCheckMode=client",
+      "Parms": "serviceName={0}&namespaceId={1}&healthCheckMode=client&metadata={}",
       "Body": ""
     },
     {

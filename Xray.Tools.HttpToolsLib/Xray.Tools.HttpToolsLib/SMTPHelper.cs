@@ -29,7 +29,7 @@ namespace Xray.Tools.HttpToolsLib
                 BodyEncoding = Encoding.UTF8,//正文编码
                 IsBodyHtml = true,//设置为HTML格式
                 Priority = MailPriority.Low//优先级
-            }; 
+            };
             // 发送人和收件人
             entity.ToEmail?.ForEach(to=> {
                 mailMessage.To.Add(to);

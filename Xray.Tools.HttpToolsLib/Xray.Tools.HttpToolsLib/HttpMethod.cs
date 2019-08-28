@@ -183,6 +183,11 @@ namespace Xray.Tools.HttpToolsLib
         {
             return new HttpHelper().GetHtml(httpItem);
         }
+
+        public static String HttpWork_Html(HttpItem httpItem)
+        {
+            return new HttpHelper().GetHtml(httpItem).Html;
+        }
         public static HttpResult HttpWork(HttpInfo Httpinfo, HttpClient client)
         {
             MemoryStream _stream = null;
@@ -515,16 +520,35 @@ namespace Xray.Tools.HttpToolsLib
 
         #endregion
 
-        #region 文件下载
+        #region 文件上传下载
+        public static HttpResult UpLoadFile(String url,String path,String encode = "utf-8")
+        {
+            wclient = new WebClient();
+            return new HttpResult
+            {
+                Html = Encoding.GetEncoding(encode).GetString(wclient.UploadFile(url, path)),
+                Cookie = wclient.ResponseHeaders["Set-Cookie"]
+            };
+        }
+        public static HttpResult DownLoadFile(String url, String encode = "utf-8")
+        {
+            wclient = new WebClient();
+            return new HttpResult
+            {
+                Html = Encoding.GetEncoding(encode).GetString(wclient.DownloadData(url)),
+                Cookie = wclient.ResponseHeaders["Set-Cookie"],
+            };
+        }
         public static byte[] DownLoadFile(String url)
         {
             return wclient.DownloadData(url);
         }
-        public static bool DownLoadFile(String url, String filename)
+        public static bool DownLoadFileNoCookie(String url, String filename)
         {
             wclient.DownloadFile(url, filename);
             return File.Exists(filename);
         }
+
         #endregion
     }
 }

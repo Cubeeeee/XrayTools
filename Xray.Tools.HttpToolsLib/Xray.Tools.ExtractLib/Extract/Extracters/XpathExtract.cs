@@ -30,7 +30,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             {
                 String value = String.Empty;
                 //没有属性值直接取innertext
-                if(String.IsNullOrEmpty(xpathparm.Attr))
+                if(!String.IsNullOrEmpty(xpathparm.Attr))
                 {
                     value = node.InnerText;
                 }
@@ -58,7 +58,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
                 return node.InnerHtml;
             }
             //非null校验值
-            else if(String.IsNullOrEmpty(xpathparm.Attr))
+            else if(!String.IsNullOrEmpty(xpathparm.Attr))
             {
                 return node.Attributes[xpathparm.Attr]?.Value;
             }
@@ -85,7 +85,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
                         list.Add(node.InnerHtml);
                     }
                     //非null校验值
-                    else if (String.IsNullOrEmpty(xpathparm.Attr))
+                    else if (!String.IsNullOrEmpty(xpathparm.Attr))
                     {
                         list.Add(node.Attributes[xpathparm.Attr]?.Value);
                     }

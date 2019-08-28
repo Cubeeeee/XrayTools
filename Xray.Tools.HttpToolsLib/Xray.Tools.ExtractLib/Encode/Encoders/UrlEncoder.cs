@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Web;
 using Xray.Tools.ExtractLib.Interfaces;
 
@@ -35,7 +36,19 @@ namespace Xray.Tools.ExtractLib.Encode.Encoders
             }
             for (int i = 0; i < time; i++)
             {
-                Str = HttpUtility.UrlEncode(Str, System.Text.Encoding.GetEncoding(encodestr));
+                StringBuilder builder = new StringBuilder();
+                foreach (char c in Str)
+                {
+                    if (HttpUtility.UrlEncode(c.ToString()).Length > 1)
+                    {
+                        builder.Append(HttpUtility.UrlEncode(c.ToString()).ToUpper());
+                    }
+                    else
+                    {
+                        builder.Append(c);
+                    }
+                }
+                Str =  builder.ToString();
             }
             return (T)(object)(upper ? Str.ToUpper() : Str.ToLower());
         }

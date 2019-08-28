@@ -10,7 +10,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Xray.Tools.ExtractLib\Xray.Tools.ExtractLib.csproj" />
     <ProjectReference Include="..\Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="tyc-num.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
