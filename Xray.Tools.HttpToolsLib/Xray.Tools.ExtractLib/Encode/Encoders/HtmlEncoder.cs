@@ -11,6 +11,10 @@ namespace Xray.Tools.ExtractLib.Encode.Encoders
         {
             if (parm is int time)
             {
+                if (time == 0)
+                {
+                    time = 1;
+                }
                 for (int i = 0; i < time; i++)
                 {
                     str = (T)(object)HttpUtility.HtmlEncode(str);
@@ -28,6 +32,10 @@ namespace Xray.Tools.ExtractLib.Encode.Encoders
         {
             if (parm is int time)
             {
+                if (time == 0)
+                {
+                    time = 1;
+                }
                 for (int i = 0; i < time; i++)
                 {
                     str = (T)(object)HttpUtility.HtmlDecode(Convert.ToString(str));

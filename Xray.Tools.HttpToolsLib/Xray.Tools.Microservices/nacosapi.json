@@ -30,7 +30,7 @@
       "Description": "发送某个实例的心跳",
       "Method": "PUT",
       "Url": "/nacos/v1/ns/instance/beat",
-      "Parms": "serviceName={0}&beat={1}",
+      "Parms": "serviceName={0}&beat={1}&namespaceId={2}",
       "Body": ""
     },
     {

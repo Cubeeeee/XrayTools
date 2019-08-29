@@ -31,7 +31,7 @@ namespace Xray.Tools.Microservices.ServiceManager.Nacos
             NacosAPIEntity entity = GetNacosAPI("Beat");
             item = new HttpItem
             {
-                URL = $"{nacoshost}{entity.Url}?{String.Format(entity.Parms, query.Name, JsonConvert.SerializeObject(new { cluster = query.clustername, ip = query.ip, port = query.port, scheduled = true, serviceName = query.Name, query.weight }))}",
+                URL = $"{nacoshost}{entity.Url}?{String.Format(entity.Parms, query.Name, JsonConvert.SerializeObject(new { cluster = query.clustername, ip = query.ip, port = query.port, scheduled = true, serviceName = query.Name, query.weight }),query.NameSpaceId)}",
                 Method = entity.Method
             };
             String html = HttpMethod.HttpWork(item).Html;

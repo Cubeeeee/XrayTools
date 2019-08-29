@@ -41,7 +41,8 @@ namespace Xray.Tools.ExtractLib.Encode.Encoders
                 {
                     if (HttpUtility.UrlEncode(c.ToString()).Length > 1)
                     {
-                        builder.Append(HttpUtility.UrlEncode(c.ToString()).ToUpper());
+                        var value = HttpUtility.UrlEncode(c.ToString());
+                        builder.Append(upper ? value.ToUpper() : value.ToLower());
                     }
                     else
                     {
@@ -50,7 +51,7 @@ namespace Xray.Tools.ExtractLib.Encode.Encoders
                 }
                 Str =  builder.ToString();
             }
-            return (T)(object)(upper ? Str.ToUpper() : Str.ToLower());
+            return (T)(object)(Str);
         }
     }
 
