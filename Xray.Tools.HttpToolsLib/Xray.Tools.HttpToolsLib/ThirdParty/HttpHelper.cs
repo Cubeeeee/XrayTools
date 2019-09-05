@@ -297,7 +297,7 @@ namespace Xray.Tools.HttpToolsLib
                 } //写入字符串
                 else if (!string.IsNullOrEmpty(objhttpItem.Postdata))
                 {
-                    buffer = Encoding.Default.GetBytes(objhttpItem.Postdata);
+                    buffer = Encoding.UTF8.GetBytes(objhttpItem.Postdata);
                 }
                 if (buffer != null)
                 {

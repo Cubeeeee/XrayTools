@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>Xray.Tools.HttpToolsLib</PackageId>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>nb-ray</Authors>
     <Company>nb-ray</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
