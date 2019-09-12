@@ -404,7 +404,7 @@ namespace Xray.Tools.HttpToolsLib
                 {
                     item = requestchangefunc.Invoke(httpItem);
                     result = HttpWork(item);
-                    //Console.WriteLine($"尝试第{ int.MaxValue-trytime}次");
+                    Console.WriteLine($"尝试第{ int.MaxValue - trytime}次");
                     Thread.Sleep(1);
                 }
                 if(resultcheckfunc.Invoke(result))

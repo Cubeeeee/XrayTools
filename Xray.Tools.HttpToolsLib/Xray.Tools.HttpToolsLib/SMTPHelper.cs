@@ -7,10 +7,10 @@ namespace Xray.Tools.HttpToolsLib
 {
     public class SMTPHelper
     {
-  
+
         public static bool SendEmail(MailEntity entity)
         {
-            if(!entity.CanSend)
+            if (!entity.CanSend)
             {
                 return false;
             }
@@ -18,7 +18,8 @@ namespace Xray.Tools.HttpToolsLib
             {
                 DeliveryMethod = SmtpDeliveryMethod.Network,//指定电子邮件发送方式
                 Host = entity.Host, //指定SMTP服务器
-                Credentials = new System.Net.NetworkCredential(entity.FromEmail, entity.PassOrCode)//用户名和密码
+                Credentials = new System.Net.NetworkCredential(entity.FromEmail, entity.PassOrCode),//用户名和密码
+                Timeout = 15000,
             };
             // 发送邮件设置        
             MailMessage mailMessage = new MailMessage
@@ -31,16 +32,19 @@ namespace Xray.Tools.HttpToolsLib
                 Priority = MailPriority.Low//优先级
             };
             // 发送人和收件人
-            entity.ToEmail?.ForEach(to=> {
+            entity.ToEmail?.ForEach(to =>
+            {
                 mailMessage.To.Add(to);
             });
-            entity.CCEmail?.ForEach(cc => {
+            entity.CCEmail?.ForEach(cc =>
+            {
                 mailMessage.CC.Add(cc);
             });
-            entity.Attachments?.ForEach(att=> {
+            entity.Attachments?.ForEach(att =>
+            {
                 mailMessage.Attachments.Add(new Attachment(att));
             });
-       
+
             try
             {
                 smtpClient.Send(mailMessage); // 发送邮件
@@ -52,6 +56,7 @@ namespace Xray.Tools.HttpToolsLib
                 return false;
             }
         }
+
     }
 
     public class MailEntity
@@ -74,7 +79,7 @@ namespace Xray.Tools.HttpToolsLib
         public List<String> CCEmail { get; set; }
         public List<String> Attachments { get; set; }
         public String Host { get => GetServerHost(FromEmail); }
-        public bool CanSend { get=> !(String.IsNullOrEmpty(FromEmail)||String.IsNullOrEmpty(PassOrCode)||ToEmail?.Count == 0); }
+        public bool CanSend { get => !(String.IsNullOrEmpty(FromEmail) || String.IsNullOrEmpty(PassOrCode) || ToEmail?.Count == 0); }
 
     }
 }
