@@ -29,9 +29,9 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
                 RegexPam regexPam = BaseParm.ConvertParm<RegexPam>(parm);
                 Regex reg = new Regex(Regstr, regexPam.Options);
                 var match = reg.Match(Txt);
-                if (match?.Groups?.Count >= regexPam.Gropu)
+                if (match?.Groups?.Count >= regexPam.Group)
                 {
-                    retStr = reg.Match(Txt).Groups[regexPam.Gropu].Value;
+                    retStr = reg.Match(Txt).Groups[regexPam.Group].Value;
                 }
             }
             return retStr;
@@ -49,9 +49,9 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
                     var matches = reg.Matches(Txt);
                     foreach (Match match in matches)
                     {
-                        if (match?.Groups?.Count >= regexPam.Gropu)
+                        if (match?.Groups?.Count >= regexPam.Group)
                         {
-                            list.Add(reg.Match(Txt).Groups[regexPam.Gropu].Value);
+                            list.Add(reg.Match(Txt).Groups[regexPam.Group].Value);
                         }
                     }
                 }
