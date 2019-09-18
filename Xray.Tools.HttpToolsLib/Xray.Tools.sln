@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.Microservices", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Demo.Dotnet", "Xray.Demo.Dotnet\Xray.Demo.Dotnet.csproj", "{F9ED2FC4-3859-4243-8D77-897204C5BFFD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.Excel", "Xray.Tools.Excel\Xray.Tools.Excel.csproj", "{B1B6699A-ACDF-4956-8D99-BE70DCC2058D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.SpiderHelper", "Xray.Tools.SpiderHelper\Xray.Tools.SpiderHelper.csproj", "{146372BC-36A8-4C90-84D1-94553654D220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.SpiderHelper", "Xray.Tools.SpiderHelper\Xray.Tools.SpiderHelper.csproj", "{146372BC-36A8-4C90-84D1-94553654D220}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.Office", "Xray.Tools.Office\Xray.Tools.Office.csproj", "{B79DF731-A7B0-45F1-B6F1-5854E490AFE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,14 +55,14 @@ Global
 		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9ED2FC4-3859-4243-8D77-897204C5BFFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1B6699A-ACDF-4956-8D99-BE70DCC2058D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1B6699A-ACDF-4956-8D99-BE70DCC2058D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1B6699A-ACDF-4956-8D99-BE70DCC2058D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1B6699A-ACDF-4956-8D99-BE70DCC2058D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{146372BC-36A8-4C90-84D1-94553654D220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{146372BC-36A8-4C90-84D1-94553654D220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{146372BC-36A8-4C90-84D1-94553654D220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{146372BC-36A8-4C90-84D1-94553654D220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B79DF731-A7B0-45F1-B6F1-5854E490AFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B79DF731-A7B0-45F1-B6F1-5854E490AFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B79DF731-A7B0-45F1-B6F1-5854E490AFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B79DF731-A7B0-45F1-B6F1-5854E490AFE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
