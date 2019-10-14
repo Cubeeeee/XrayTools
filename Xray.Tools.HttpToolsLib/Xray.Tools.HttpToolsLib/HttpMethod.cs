@@ -328,12 +328,12 @@ namespace Xray.Tools.HttpToolsLib
         /// <param name="httpItem"></param>
         /// <param name="trytime"></param>
         /// <returns></returns>
-        public static HttpResult HttpWork<T>(Func<String,bool> htmlcheckfunc, T httpItem,int trytime = 10) where T :HttpItem
+        public static HttpResult HttpWork<T>(Func<String, bool> htmlcheckfunc, T httpItem, int trytime = 10) where T : HttpItem
         {
             HttpResult result = HttpWork(httpItem);
             try
             {
-                while(!htmlcheckfunc.Invoke(result.Html)&&--trytime>0)
+                while (!htmlcheckfunc.Invoke(result.Html) && --trytime > 0)
                 {
                     result = HttpWork(httpItem);
                     Thread.Sleep(1);
@@ -366,7 +366,7 @@ namespace Xray.Tools.HttpToolsLib
                 {
                     trytime++;
                 }
-                while (!resultcheckfunc.Invoke(result) && --trytime > 0)
+                while (result == null || !resultcheckfunc.Invoke(result) && --trytime > 0)
                 {
                     result = HttpWork(requestchangefunc.Invoke(httpItem));
                     Thread.Sleep(1);
@@ -386,13 +386,13 @@ namespace Xray.Tools.HttpToolsLib
         /// <param name="httpItem"></param>
         /// <param name="trytime"></param>
         /// <returns></returns>
-        public static HttpResult HttpWork<T>(Func<HttpResult, bool> resultcheckfunc, Func<T, T> requestchangefunc, Func<T, bool> endfunc,T httpItem, int trytime = 20) where T : HttpItem
+        public static HttpResult HttpWork<T>(Func<HttpResult, bool> resultcheckfunc, Func<T, T> requestchangefunc, Func<T, bool> endfunc, T httpItem, int trytime = 20) where T : HttpItem
         {
             HttpResult result = null;
             try
             {
                 T item = default(T);
-                if(trytime  == -1)
+                if (trytime == -1)
                 {
                     trytime = int.MaxValue;
                 }
@@ -404,10 +404,17 @@ namespace Xray.Tools.HttpToolsLib
                 {
                     item = requestchangefunc.Invoke(httpItem);
                     result = HttpWork(item);
-                    Console.WriteLine($"尝试第{ int.MaxValue - trytime}次");
+                    //if(trytime == -1)
+                    //{
+                    //    Console.WriteLine($"剩余尝试第{ int.MaxValue - trytime}次");
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine($"剩余尝试第{ trytime}次");
+                    //}
                     Thread.Sleep(1);
                 }
-                if(resultcheckfunc.Invoke(result))
+                if (resultcheckfunc.Invoke(result))
                 {
                     endfunc.Invoke(item);
                 }
@@ -558,6 +565,32 @@ namespace Xray.Tools.HttpToolsLib
             return result;
         }
 
+        public static String GetRow(HttpItem item)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (String.IsNullOrEmpty(item.Method))
+            {
+                item.Method = "GET";
+            }
+            else
+            {
+                sb.AppendLine($"{item.Method} {item.URL}  HTTP/1.1");
+                sb.AppendLine($"Content-Type:{item.ContentType}");
+                sb.AppendLine($"User-Agent:{item.UserAgent}");
+                sb.AppendLine($"Accept:{item.Accept}");
+                sb.AppendLine($"Referer:{item.Referer}");
+                sb.AppendLine($"Cookie:{item.Cookie}");
+
+                foreach (String key in item.Header)
+                {
+                    sb.AppendLine($"{key}:{item.Header[key]}");
+                }
+
+                sb.AppendLine();
+                sb.Append(item.Postdata);
+            }
+            return sb.ToString();
+        }
 
         #region 快速方法
         /// <summary>
@@ -630,7 +663,7 @@ namespace Xray.Tools.HttpToolsLib
         #endregion
 
         #region 文件上传下载
-        public static HttpResult UpLoadFile(String url,String path,String encode = "utf-8")
+        public static HttpResult UpLoadFile(String url, String path, String encode = "utf-8")
         {
             wclient = new WebClient();
             return new HttpResult

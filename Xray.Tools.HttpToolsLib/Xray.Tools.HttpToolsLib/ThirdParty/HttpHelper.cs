@@ -32,6 +32,14 @@ namespace Xray.Tools.HttpToolsLib
     /// </summary>
     public class HttpHelper
     {
+        ~HttpHelper()
+        {
+            if (request != null)
+            {
+                request.Abort();
+                request = null;
+            }
+        }
         #region 预定义方法或者变更
         //默认的编码
         private Encoding encoding = Encoding.Default;
@@ -168,6 +176,14 @@ namespace Xray.Tools.HttpToolsLib
             catch (Exception ex)
             {
                 result.Html = ex.Message;
+            }
+            finally
+            {
+                if(request!=null)
+                {
+                    request.Abort();
+                    request = null;
+                }
             }
             if (objhttpitem.IsToLower)
                 result.Html = result.Html.ToLower();
