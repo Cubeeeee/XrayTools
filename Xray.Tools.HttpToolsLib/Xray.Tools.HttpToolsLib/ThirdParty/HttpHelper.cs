@@ -228,7 +228,7 @@ namespace Xray.Tools.HttpToolsLib
             // 设置代理
             SetProxy(objhttpItem);
             //请求方式Get或者Post
-            request.KeepAlive = true;
+            request.KeepAlive = objhttpItem.KeepAlive;
             request.Method = objhttpItem.Method;
             request.Timeout = objhttpItem.Timeout;
             request.ReadWriteTimeout = objhttpItem.ReadWriteTimeout;
@@ -246,7 +246,9 @@ namespace Xray.Tools.HttpToolsLib
             request.Referer = objhttpItem.Referer;
             //是否执行跳转功能
             request.AllowAutoRedirect = objhttpItem.Allowautoredirect;
-            request.AllowWriteStreamBuffering = true;
+            request.AllowWriteStreamBuffering = objhttpItem.AllowWriteStreamBuffering;
+            request.ServicePoint.Expect100Continue = objhttpItem.Expect100Continue;
+            request.ServicePoint.UseNagleAlgorithm = objhttpItem.UseNagleAlgorithm;
             //设置Post数据
             SetPostData(objhttpItem);
             //设置最大连接
@@ -259,10 +261,10 @@ namespace Xray.Tools.HttpToolsLib
         /// <param name="objhttpItem"></param>
         private void SetCer(HttpItem objhttpItem)
         {
+            //这一句一定要写在创建连接的前面。使用回调的方法进行证书验证。
+            ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
             if (!string.IsNullOrEmpty(objhttpItem.CerPath))
             {
-                //这一句一定要写在创建连接的前面。使用回调的方法进行证书验证。
-                ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);
                 //初始化对像，并设置请求的URL地址
                 request = (HttpWebRequest)WebRequest.Create(objhttpItem.URL);
                 //将证书添加到请求里
@@ -350,6 +352,10 @@ namespace Xray.Tools.HttpToolsLib
                 }
                 //设置安全凭证
                 request.Credentials = CredentialCache.DefaultNetworkCredentials;
+            }
+            else
+            {
+                request.Proxy = null;
             }
         }
 
@@ -617,6 +623,11 @@ namespace Xray.Tools.HttpToolsLib
             get { return header; }
             set { header = value; }
         }
+
+        public bool AllowWriteStreamBuffering { get;  set; } = true;
+        public bool Expect100Continue { get; set; } = false;
+        public bool UseNagleAlgorithm { get;  set; } = false;
+        public bool KeepAlive { get; set; } = false;
     }
     /// <summary>
     /// Http返回参数类
