@@ -10,6 +10,9 @@ using Xray.Tools.HttpToolsLib;
 
 namespace Xray.Demo.DotnetCore
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
