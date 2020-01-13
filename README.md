@@ -2,7 +2,7 @@
 ## Xray工具类库汇总
 ----
 
-# Xray.XXY.XXX
+# Xray.Demo.XXX
 ## 测试Demo程序，包含.Net和.Net Core两个Demo,类库大多数使用.Net Standard开发，两者都支持
 ----
 
