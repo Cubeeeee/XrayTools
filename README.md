@@ -24,8 +24,7 @@
 
 # Xray.Tools.Office
 ## 封装了Office办公套件操作，基于Aspose.dll,目前实现了对于Excel的标准化输出，支持Excel样式，只能用于.Net平台，使用Demo见
-<a href="https://blog.csdn.net/qq_26712977/article/details/78529077" target="_blank">
-        <span class="article-type type-1 float-none">Excel操作帮助类 (基于Aspose.Cells.dll)</span></a>
+<a href="https://blog.csdn.net/qq_26712977/article/details/78529077" target="_blank"><span class="article-type type-1 float-none">Excel操作帮助类 (基于Aspose.Cells.dll)</span></a>
 
 # Xray.Tools.ScriptEngine
 ## 封装了JS脚本执行引擎
