@@ -673,6 +673,8 @@ namespace Xray.Tools.HttpToolsLib
             while (!finish && --Limit > 0)
             {
                 result = HttpMethod.HttpWork(item);
+                item.Method = "GET";
+                item.Postdata = String.Empty;
                 String location = result.Header["Location"];
                 finish = String.IsNullOrEmpty(location);
                 item.URL = location;
