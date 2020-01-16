@@ -65,7 +65,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             if (!String.IsNullOrEmpty(Txt))
             {
                 Regex reg = new Regex(Reg);
-                return reg.Replace(Txt, Reg);
+                return reg.Replace(Txt, RepStr);
             }
             return String.Empty;
         }
