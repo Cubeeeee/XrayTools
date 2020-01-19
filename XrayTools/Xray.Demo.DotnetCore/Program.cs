@@ -11,7 +11,7 @@ using Xray.Tools.HttpToolsLib;
 namespace Xray.Demo.DotnetCore
 {
     /// <summary>
-    /// 
+    /// 测试Demo
     /// </summary>
     class Program
     {
