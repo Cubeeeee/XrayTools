@@ -264,8 +264,7 @@ namespace Xray.Tools.Office.Excel
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("保存失败");
-                    throw ex;
+                    Console.WriteLine($"保存失败:{ex.Message}");
                 }
             }
         }
