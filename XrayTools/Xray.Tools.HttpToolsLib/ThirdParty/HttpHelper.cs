@@ -112,7 +112,7 @@ namespace Xray.Tools.HttpToolsLib
                 #endregion
             }
             catch (WebException ex)
-            {
+            { 
                 response = (HttpWebResponse)ex.Response;
                 if (!objhttpitem.IgnoreWebException)
                 {
@@ -169,6 +169,11 @@ namespace Xray.Tools.HttpToolsLib
                 //这里是在发生异常时返回的错误信息
                 if (response != null)
                 {
+                    result.Header = response.Headers;
+                    if (response.Cookies != null)
+                        result.CookieCollection = response.Cookies;
+                    if (response.Headers["set-cookie"] != null)
+                        result.Cookie = response.Headers["set-cookie"];
                     result.StatusCode = response.StatusCode;
                     result.StatusDescription = response.StatusDescription;
                 }
@@ -249,6 +254,7 @@ namespace Xray.Tools.HttpToolsLib
             request.AllowWriteStreamBuffering = objhttpItem.AllowWriteStreamBuffering;
             request.ServicePoint.Expect100Continue = objhttpItem.Expect100Continue;
             request.ServicePoint.UseNagleAlgorithm = objhttpItem.UseNagleAlgorithm;
+            request.MaximumAutomaticRedirections = 50;
             //设置Post数据
             SetPostData(objhttpItem);
             //设置最大连接

@@ -659,7 +659,27 @@ namespace Xray.Tools.HttpToolsLib
                 ProxyPwd = password
             })?.Html.Contains(ip));
         }
-
+        /// <summary>
+        /// 手动重定向
+        /// </summary>
+        /// <param name="item">HttpItem</param>
+        /// <param name="Limit">最大重定向次数 默认20次</param>
+        /// <returns></returns>
+        public static HttpResult HttpWork_Redirect(HttpItem item, int Limit = 20)
+        {
+            HttpResult result = new HttpResult();
+            bool finish = false;
+            item.Allowautoredirect = false;
+            while (!finish && --Limit > 0)
+            {
+                result = HttpMethod.HttpWork(item);
+                String location = result.Header["Location"];
+                finish = String.IsNullOrEmpty(location);
+                item.URL = location;
+                Thread.Sleep(1);
+            }
+            return result;
+        }
         #endregion
 
         #region 文件上传下载

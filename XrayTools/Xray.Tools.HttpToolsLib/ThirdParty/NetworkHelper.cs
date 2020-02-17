@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Xray.Tools.HttpToolsLib.ThirdParty
 {
@@ -77,6 +78,15 @@ namespace Xray.Tools.HttpToolsLib.ThirdParty
             }
 
             return false;
+        }
+
+        public static String GetNetworkIP(HttpItem item)
+        {
+           return  Regex.Match( HttpMethod.HttpWork_Html(item), @"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}(:\d{1,5})?").Value;
+        }
+        public static String GetNetworkIP(String url)
+        {
+            return Regex.Match(HttpMethod.FastMethod_HttpHelper(url), @"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}(:\d{1,5})?").Value;
         }
     }
 }
