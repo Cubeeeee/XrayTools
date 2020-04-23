@@ -25,6 +25,9 @@ using System.Threading;
 
 namespace Xray.Tools.ScriptEngine
 {
+    /// <summary>
+    /// 不支持 .Net Core!!!
+    /// </summary>
     public class JSEngine : IDisposable
     {
         /// <summary>
