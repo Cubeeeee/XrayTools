@@ -328,7 +328,7 @@ namespace Xray.Tools.HttpToolsLib
         /// <param name="httpItem"></param>
         /// <param name="trytime"></param>
         /// <returns></returns>
-        public static HttpResult HttpWork<T>(Func<String, bool> htmlcheckfunc, T httpItem, int trytime = 10) where T : HttpItem
+        public static HttpResult HttpWork<T>(Func<String, bool> htmlcheckfunc, T httpItem, int trytime = 10, HttpItem item = null) where T : HttpItem
         {
             HttpResult result = HttpWork(httpItem);
             try
