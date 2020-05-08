@@ -4,13 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>Xray.Tools.HttpToolsLib</PackageId>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <Authors>nb-ray</Authors>
     <Company>nb-ray</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>射线网络Http请求相关工具库，集成HttpHelper，并支持HttpClient使用
 2019/8/19 支持SMTP协议发送邮件
-2019/12/27 支持快速手动重定向，主要为了解决.net core下的AllowAutoRedirect无效的问题</Description>
+2019/12/27 支持快速手动重定向，主要为了解决.net core下的AllowAutoRedirect无效的问题
+2020/05/08 添加默认的json校验器</Description>
     <PackageProjectUrl>http://www.nb-ray.com</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/a462247201/XrayTools</RepositoryUrl>

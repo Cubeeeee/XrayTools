@@ -46,8 +46,6 @@ namespace Xray.Tools.HttpToolsLib
         /// <param name="Httpinfo"></param>
         /// <returns>返回的源代码</returns>
 
-
-
         public static String HttpWork_Html(HttpItem httpItem)
         {
             return new HttpHelper().GetHtml(httpItem).Html;
@@ -713,6 +711,18 @@ namespace Xray.Tools.HttpToolsLib
             return File.Exists(filename);
         }
 
+        #endregion
+
+        #region 返回校验方法
+        /// <summary>
+        /// 简易的json校验器
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public static bool JsonCheckSimple(String html)
+        {
+            return Convert.ToBoolean(html?.Trim().StartsWith("{")) && Convert.ToBoolean(html?.Trim().EndsWith("}"));
+        }
         #endregion
     }
 }
