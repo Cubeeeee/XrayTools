@@ -328,6 +328,10 @@ namespace Xray.Tools.HttpToolsLib
         /// <returns></returns>
         public static HttpResult HttpWork<T>(Func<String, bool> htmlcheckfunc, T httpItem, int trytime = 10, HttpItem item = null) where T : HttpItem
         {
+            if (htmlcheckfunc == null)
+            {
+                return HttpWork(httpItem);
+            }
             HttpResult result = HttpWork(httpItem);
             try
             {
@@ -353,6 +357,10 @@ namespace Xray.Tools.HttpToolsLib
         /// <returns></returns>
         public static HttpResult HttpWork<T>(Func<HttpResult, bool> htmlcheckfunc, T httpItem, int trytime = 10, HttpItem item = null) where T : HttpItem
         {
+            if (htmlcheckfunc == null)
+            {
+                return HttpWork(httpItem);
+            }
             HttpResult result = HttpWork(httpItem);
             try
             {
@@ -378,6 +386,10 @@ namespace Xray.Tools.HttpToolsLib
         /// <returns></returns>
         public static HttpResult HttpWork<T>(Func<HttpResult, bool> resultcheckfunc, Func<T, T> requestchangefunc, T httpItem, int trytime = 20) where T : HttpItem
         {
+            if(resultcheckfunc == null|| requestchangefunc == null)
+            {
+                return HttpWork(httpItem);
+            }
             HttpResult result = null;
             try
             {
@@ -411,6 +423,10 @@ namespace Xray.Tools.HttpToolsLib
         /// <returns></returns>
         public static HttpResult HttpWork<T>(Func<HttpResult, bool> resultcheckfunc, Func<T, T> requestchangefunc, Func<T, bool> endfunc, T httpItem, int trytime = 20) where T : HttpItem
         {
+            if (resultcheckfunc == null || requestchangefunc == null)
+            {
+                return HttpWork(httpItem);
+            }
             HttpResult result = null;
             try
             {
