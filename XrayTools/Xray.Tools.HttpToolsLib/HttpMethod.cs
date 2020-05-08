@@ -344,6 +344,31 @@ namespace Xray.Tools.HttpToolsLib
             return result;
         }
         /// <summary>
+        /// 尝试指定次数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="htmlcheckfunc"></param>
+        /// <param name="httpItem"></param>
+        /// <param name="trytime"></param>
+        /// <returns></returns>
+        public static HttpResult HttpWork<T>(Func<HttpResult, bool> htmlcheckfunc, T httpItem, int trytime = 10, HttpItem item = null) where T : HttpItem
+        {
+            HttpResult result = HttpWork(httpItem);
+            try
+            {
+                while (!htmlcheckfunc.Invoke(result) && --trytime > 0)
+                {
+                    result = HttpWork(httpItem);
+                    Thread.Sleep(1);
+                }
+            }
+            catch
+            {
+
+            }
+            return result;
+        }
+        /// <summary>
         /// 尝试指定次数 每次都修改请求  多用于代理IP重试
         /// </summary>
         /// <typeparam name="T"></typeparam>
