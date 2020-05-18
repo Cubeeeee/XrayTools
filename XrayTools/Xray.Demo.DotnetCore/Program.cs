@@ -24,7 +24,8 @@ namespace Xray.Demo.DotnetCore
             //String html = Encoding.UTF8.GetString(client.UploadFile("https://convertio.co/process/upload_metadata", filepath));
             //Console.WriteLine(html);
             //Console.WriteLine(client.ResponseHeaders["Set-Cookie"]);
-            
+            ExtractMethod.GetResult( ExtractType.Regex, "正则/XPATH/JPATH", "inputstr");
+            EncodeMethod.Encode( EncodeType.UrlEncode,"inputstr");
             Console.ReadKey();
         }
 
