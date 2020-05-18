@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.271
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.HttpToolsLib", "Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj", "{5CF45210-5F2E-4218-BD59-AEE3F40BC369}"
 EndProject
@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.SpiderHelper", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.Office", "Xray.Tools.Office\Xray.Tools.Office.csproj", "{B79DF731-A7B0-45F1-B6F1-5854E490AFE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.SimpleServer", "Xray.Tools.SimpleServer\Xray.Tools.SimpleServer.csproj", "{A66EC923-5D3F-44F3-899F-39B16FDE34D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xray.Tools.SimpleServer", "Xray.Tools.SimpleServer\Xray.Tools.SimpleServer.csproj", "{A66EC923-5D3F-44F3-899F-39B16FDE34D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xray.Tools.BrowserHelper", "Xray.Tools.BrowserHelper\Xray.Tools.BrowserHelper.csproj", "{4EAA7D01-33DE-4FDB-A2AE-0130B2640074}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{A66EC923-5D3F-44F3-899F-39B16FDE34D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A66EC923-5D3F-44F3-899F-39B16FDE34D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A66EC923-5D3F-44F3-899F-39B16FDE34D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EAA7D01-33DE-4FDB-A2AE-0130B2640074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EAA7D01-33DE-4FDB-A2AE-0130B2640074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EAA7D01-33DE-4FDB-A2AE-0130B2640074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EAA7D01-33DE-4FDB-A2AE-0130B2640074}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

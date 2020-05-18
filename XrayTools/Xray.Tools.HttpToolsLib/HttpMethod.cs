@@ -18,6 +18,7 @@
 #endregion
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -720,6 +721,35 @@ namespace Xray.Tools.HttpToolsLib
                 Thread.Sleep(1);
             }
             return result;
+        }
+
+        /// <summary>
+        /// 获得url和请求体的参数键值对
+        /// </summary>
+        /// <param name="url">URL</param>
+        /// <param name="postdata">请求体</param>
+        /// <returns></returns>
+        public static Dictionary<String,String> GetParms(String url,String postdata = "")
+        {
+            Dictionary<String, String> dic = new Dictionary<string, string>();
+           if(url.Contains("?"))
+            {
+                var str = $"{url.Substring(url.IndexOf('?')+1)}&{postdata}";
+                var arr = str.Split('&');
+                foreach(var a in arr)
+                {
+                    var arr1 = a.Split('=');
+                    if(arr1.Length>1)
+                    {
+                        var key = arr1[0];
+                        if(!dic.ContainsKey(key))
+                        {
+                            dic.Add(key,a.Replace($"{arr1[0]}=",String.Empty));
+                        }
+                    }
+                }
+            }
+            return dic;
         }
         #endregion
 
