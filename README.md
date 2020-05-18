@@ -14,8 +14,8 @@ Xray工具类库汇总
 
 
 # Xray.Tools.HttpToolsLib
-射线网络Http请求相关工具库，集成HttpHelper，并支持HttpClient使用
-封装了Http、SMTP请求，其中HTTP请求基于HttpWebRequest和HttpClient、并添加了如切换代理重试、重试次数控制等请求方法。封装了API代理IP池实现
+射线网络Http请求相关工具库，集成HttpHelper，并支持HttpClient使用\n
+封装了Http、SMTP请求，其中HTTP请求基于HttpWebRequest和HttpClient、并添加了如切换代理重试、重试次数控制等请求方法。封装了API代理IP池实现<\br>
 2019/8/19 支持SMTP协议发送邮件
 2019/12/27 支持快速手动重定向，主要为了解决.net core下的AllowAutoRedirect无效的问题
 2020/05/08 添加默认的json格式校验器
