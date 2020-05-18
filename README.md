@@ -7,7 +7,9 @@ Xray工具类库汇总
 
 # Xray.Tools.ExtractLib
 编码转换，字符抽取，加解密类库，支持正则表达式、Xpath、JPath几种方式进行匹配和抽取。支持时间戳、MD5、Unicode、Url等加解密或编码转换
-
+使用示例:  
+`ExtractMethod.GetResult( ExtractType.Regex, "正则/XPATH/JPATH", "inputstr");`  
+`EncodeMethod.Encode( EncodeType.UrlEncode,"inputstr");`
 
 # Xray.Tools.File
 封装了Zip文件压缩方法
