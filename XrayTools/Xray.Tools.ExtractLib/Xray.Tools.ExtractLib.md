@@ -14,3 +14,5 @@
 用法示例:  
 //url编码 连续两次编码 输出大写  返回%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593  
 `var result = EncodeMethod.Encode( EncodeType.UrlEncode,"工具库",new UrlEncodeParm {  time = 2, upper = true});`
+
+![项目解构](http://gitlab.zcznb.top/XXY/xraytool/-/raw/master/XrayTools/Images/Xray.Tools.ExtractLib.png?inline=false)
