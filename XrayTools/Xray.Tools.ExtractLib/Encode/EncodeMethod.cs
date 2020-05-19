@@ -40,7 +40,14 @@ namespace Xray.Tools.ExtractLib.Encode
                 }
             });
         }
-
+        /// <summary>
+        /// 编码操作
+        /// </summary>
+        /// <typeparam name="T">输入数据类型</typeparam>
+        /// <param name="encodeType">指定的编码方式</param>
+        /// <param name="str">输入的待编码变量 可以是object int String等 最终都会通过Convert.ToString转化为字符串</param>
+        /// <param name="parm">非通用字段 例如编码结果大小写 连续编码次数等</param>
+        /// <returns>返回编码后的结果</returns>
         public static T Encode<T>(EncodeType encodeType, T str, object parm = null)
         {
             var encodertype = typesdic[encodeType];
@@ -86,13 +93,22 @@ namespace Xray.Tools.ExtractLib.Encode
 
 
         #region TimeSamp
+        /// <summary>
+        /// 时间戳方法 DateTime转long型时间戳
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public static long GetTimeSamp(DateTime time)
         {
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
             long timeStamp = (long)(time - startTime).TotalMilliseconds; // 相差毫秒数
             return timeStamp;
         }
-
+        /// <summary>
+        /// 时间戳方法 String类型时间转long型时间戳
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static DateTime GetDateTime(String date)
         {
             long jsTimeStamp = Convert.ToInt64(date);
@@ -100,6 +116,11 @@ namespace Xray.Tools.ExtractLib.Encode
             DateTime dt = startTime.AddMilliseconds(jsTimeStamp);
             return dt;
         }
+        /// <summary>
+        /// 时间戳方法 long型时间戳转DateTime时间
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public static DateTime GetDateTime(long date)
         {
             long jsTimeStamp = date;
@@ -107,6 +128,10 @@ namespace Xray.Tools.ExtractLib.Encode
             DateTime dt = startTime.AddMilliseconds(jsTimeStamp);
             return dt;
         }
+        /// <summary>
+        /// 时间戳方法 long型时间戳转String时间
+        /// </summary>
+        /// <returns></returns>
         public static String GetTimeSamp()
         {
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); // 当地时区
