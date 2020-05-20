@@ -10,7 +10,7 @@
 //使用jsonpath匹配单条结果 返回 1  
 `var json_result = ExtractMethod.GetResults(ExtractType.Json,"{\"code\":1,\"message\":\"ok\"}","code");`  
 
-**EncodeMethod类封装了数据编码机密的一系列相关方法。目前支持Url编码、MD5、Base64、Rsa等**。  
+**EncodeMethod类封装了数据编码和加密的一系列相关方法。目前支持Url编码、MD5、Base64、Rsa等**。  
 用法示例:  
 //url编码 连续两次编码 输出大写  返回%25E5%25B7%25A5%25E5%2585%25B7%25E5%25BA%2593  
 `var result = EncodeMethod.Encode( EncodeType.UrlEncode,"工具库",new UrlEncodeParm {  time = 2, upper = true});`
