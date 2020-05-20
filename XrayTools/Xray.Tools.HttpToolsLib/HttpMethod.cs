@@ -604,7 +604,11 @@ namespace Xray.Tools.HttpToolsLib
 
             return result;
         }
-
+        /// <summary>
+        /// 转换为标准请求Row
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public static String GetRow(HttpItem item)
         {
             StringBuilder sb = new StringBuilder();
@@ -688,12 +692,12 @@ namespace Xray.Tools.HttpToolsLib
         /// </summary>
         /// <param name="proxy"></param>
         /// <returns></returns>
-        public static bool CheckProxy(String proxy, String username = "", String password = "")
+        public static bool CheckProxy(String proxy,String username = "", String password = "", String url = null)
         {
             var ip = proxy?.Split(':')?[0];
             return Convert.ToBoolean(HttpWork(new HttpItem
             {
-                URL = CheckUrl,
+                URL = url??CheckUrl,
                 ProxyIp = proxy,
                 ProxyUserName = username,
                 ProxyPwd = password

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Xray.Tools.HttpToolsLib
 {
+    /// <summary>
+    /// 本地缓存代理IP池
+    /// </summary>
     public class LocalIPPool
     {
         static bool Runing = false;
