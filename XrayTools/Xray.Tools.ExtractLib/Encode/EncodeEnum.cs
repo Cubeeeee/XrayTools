@@ -11,5 +11,7 @@
         Base64Encode,
         Base64Decode,
         MD5Encode,
+        AESEncode,
+        AESDecode,
     }
 }

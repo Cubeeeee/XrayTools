@@ -5,9 +5,16 @@ using System.Text;
 
 namespace Xray.Tools.HttpToolsLib
 {
+    /// <summary>
+    /// 邮件发送帮助类
+    /// </summary>
     public class SMTPHelper
     {
-
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public static bool SendEmail(MailEntity entity)
         {
             if (!entity.CanSend)
@@ -61,6 +68,11 @@ namespace Xray.Tools.HttpToolsLib
 
     public class MailEntity
     {
+        /// <summary>
+        /// 自动识别邮件服务器 目前支持163
+        /// </summary>
+        /// <param name="userEmailAddress"></param>
+        /// <returns></returns>
         private static String GetServerHost(String userEmailAddress)
         {
             String host = String.Empty;
@@ -70,13 +82,34 @@ namespace Xray.Tools.HttpToolsLib
             }
             return host;
         }
+        /// <summary>
+        /// 发送人邮箱
+        /// </summary>
         public String FromEmail { get; set; }
         public String DisplayName { get; set; } = "Xray";
+        /// <summary>
+        /// 密码或授权码
+        /// </summary>
         public String PassOrCode { get; set; }
+        /// <summary>
+        /// 主题
+        /// </summary>
         public String Subject { get; set; }
+        /// <summary>
+        /// 内容
+        /// </summary>
         public String Content { get; set; }
+        /// <summary>
+        /// 目标邮箱地址
+        /// </summary>
         public List<String> ToEmail { get; set; }
+        /// <summary>
+        /// 抄送邮箱地址
+        /// </summary>
         public List<String> CCEmail { get; set; }
+        /// <summary>
+        /// 附件
+        /// </summary>
         public List<String> Attachments { get; set; }
         public String Host { get => GetServerHost(FromEmail); }
         public bool CanSend { get => !(String.IsNullOrEmpty(FromEmail) || String.IsNullOrEmpty(PassOrCode) || ToEmail?.Count == 0); }
