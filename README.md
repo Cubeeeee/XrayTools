@@ -16,7 +16,7 @@ Xray工具类库汇总
 封装了Zip文件压缩方法
 
 
-# Xray.Tools.HttpToolsLib
+# [Xray.Tools.HttpToolsLib](http://gitlab.zcznb.top/XXY/xraytool/-/blob/master/XrayTools/Xray.Tools.HttpToolsLib/Xray.Tools.HttpToolsLib.md)
 射线网络Http请求相关工具库，集成HttpHelper，并支持HttpClient使用  
 封装了Http、SMTP请求，其中HTTP请求基于HttpWebRequest和HttpClient、并添加了如切换代理重试、重试次数控制等请求方法。封装了API代理IP池实现  
 2019/8/19 支持SMTP协议发送邮件  
