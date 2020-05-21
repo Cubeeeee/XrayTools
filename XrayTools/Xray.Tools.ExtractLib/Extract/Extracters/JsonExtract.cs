@@ -14,7 +14,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
         public bool Check(string Txt, string Jpath, T parm = null)
         {
             Txt = Txt?.Trim();
-            if(Txt.StartsWith("{")&&Txt.EndsWith("}")&&JsonConvert.DeserializeObject(Txt) is JObject jobj)
+            if(JsonConvert.DeserializeObject(Txt) is JObject jobj)
             {
                 JsonParm jsonam = BaseParm.ConvertParm<JsonParm>(parm);
                 String str = Convert.ToString(jobj.SelectToken(Jpath));
@@ -26,7 +26,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
         public string GetResult(string Txt, string Jpath, T parm)
         {
             Txt = Txt?.Trim();
-            if (Txt.StartsWith("{") && Txt.EndsWith("}") && JsonConvert.DeserializeObject(Txt) is JObject jobj)
+            if (JsonConvert.DeserializeObject(Txt) is JObject jobj)
             {
                 JsonParm jsonam = BaseParm.ConvertParm<JsonParm>(parm);
                 String str = Convert.ToString(jobj.SelectToken(Jpath));
@@ -39,7 +39,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
         {
             Txt = Txt?.Trim();
             List<String> list = new List<string>();
-            if (Txt.StartsWith("{") && Txt.EndsWith("}") && JsonConvert.DeserializeObject(Txt) is JObject jobj)
+            if (JsonConvert.DeserializeObject(Txt) is JObject jobj)
             {
                 JsonParm jsonam = BaseParm.ConvertParm<JsonParm>(parm);
                 var tokens = jobj.SelectTokens(Jpath);
