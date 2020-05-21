@@ -9,8 +9,8 @@ namespace Xray.Tools.ExtractLib.Interfaces
     {
         bool Check(String Txt,String Reg,T parm);
         String GetResult(String Txt,String Reg,T parm);
-        IEnumerable<String> GetResults(String Txt, String Reg, T parm);
-        IEnumerable<String> Split(String Txt, String Reg);
+        List<String> GetResults(String Txt, String Reg, T parm);
+        List<String> Split(String Txt, String Reg);
         String Replace(String Txt,String Reg,String RepStr);
     }
 }

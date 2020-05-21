@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -18,10 +19,8 @@ namespace Xray.Demo.DotnetCore
     {
         static void Main(string[] args)
         {
-            String key = "xrayxrayxrayxray";
-            var aesstr = EncodeMethod.Encode(EncodeType.AESEncode, "xray", key);
-            Console.WriteLine(aesstr);
-            Console.WriteLine(EncodeMethod.Encode(EncodeType.AESDecode, aesstr, key));
+            var json = File.ReadAllText("data.json");
+            var test = ExtractMethod.GetResults(ExtractType.Json, json, "[*].1");
             //GetParmTest();
             ////使用正则表达式匹配多条结果 返回123,42
             //var regex_result =  ExtractMethod.GetResults(ExtractType.Regex,"xray123cube42","\\d+");

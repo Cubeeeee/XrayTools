@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Xray.Tools.ExtractLib.Extract.ExtractParms;
 using Xray.Tools.ExtractLib.Interfaces;
@@ -37,7 +38,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             return retStr;
         }
 
-        public IEnumerable<String> GetResults(string Txt, string Regstr, T parm)
+        public List<String> GetResults(string Txt, string Regstr, T parm)
         {
             List<String> list = new List<String>();
             if (!String.IsNullOrEmpty(Txt))
@@ -70,10 +71,10 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             return String.Empty;
         }
 
-        public IEnumerable<String> Split(string Txt, string Reg)
+        public List<String> Split(string Txt, string Reg)
         {
             Regex reg = new Regex(Reg);
-            return reg.Split(Txt);
+            return reg.Split(Txt)?.ToList();
         }
     }
 

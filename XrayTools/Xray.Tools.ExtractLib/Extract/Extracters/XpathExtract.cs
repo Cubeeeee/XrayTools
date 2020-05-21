@@ -68,7 +68,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             }
         }
 
-        public IEnumerable<string> GetResults(string Txt, string Xpath, T parm)
+        public List<string> GetResults(string Txt, string Xpath, T parm)
         {
             List<String> list = new List<string>();
             HtmlAgilityPack.HtmlDocument doc = new HtmlDocument();
@@ -103,7 +103,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             throw new NotImplementedException();
         }
 
-        public IEnumerable<string> Split(string Txt, string Reg)
+        public List<string> Split(string Txt, string Reg)
         {
             throw new NotImplementedException();
         }

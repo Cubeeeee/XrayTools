@@ -14,10 +14,19 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
         public bool Check(string Txt, string Jpath, T parm = null)
         {
             Txt = Txt?.Trim();
-            if(JsonConvert.DeserializeObject(Txt) is JObject jobj)
+            JToken token = default;
+            if(Txt.StartsWith("{") && Txt.EndsWith("}"))
+            {
+                token = JsonConvert.DeserializeObject(Txt) as JObject;
+            }
+            else if(Txt.StartsWith("[") && Txt.EndsWith("]"))
+            {
+                token = JsonConvert.DeserializeObject(Txt) as JArray;
+            }
+            if(token!=null)
             {
                 JsonParm jsonam = BaseParm.ConvertParm<JsonParm>(parm);
-                String str = Convert.ToString(jobj.SelectToken(Jpath));
+                String str = Convert.ToString(token.SelectToken(Jpath));
                 return str.Equals(jsonam.CheckStr, jsonam.caseoption);
             }
             return false;
@@ -26,24 +35,42 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
         public string GetResult(string Txt, string Jpath, T parm)
         {
             Txt = Txt?.Trim();
-            if (JsonConvert.DeserializeObject(Txt) is JObject jobj)
+            JToken token = default;
+            if (Txt.StartsWith("{") && Txt.EndsWith("}"))
+            {
+                token = JsonConvert.DeserializeObject(Txt) as JObject;
+            }
+            else if (Txt.StartsWith("[") && Txt.EndsWith("]"))
+            {
+                token = JsonConvert.DeserializeObject(Txt) as JArray;
+            }
+            if(token!=null)
             {
                 JsonParm jsonam = BaseParm.ConvertParm<JsonParm>(parm);
-                String str = Convert.ToString(jobj.SelectToken(Jpath));
+                String str = Convert.ToString(token.SelectToken(Jpath));
                 return str;
             }
             return String.Empty;
         }
 
-        public IEnumerable<string> GetResults(string Txt, string Jpath, T parm)
+        public List<string> GetResults(string Txt, string Jpath, T parm)
         {
             Txt = Txt?.Trim();
             List<String> list = new List<string>();
-            if (JsonConvert.DeserializeObject(Txt) is JObject jobj)
+            JToken token = default;
+            if (Txt.StartsWith("{") && Txt.EndsWith("}"))
+            {
+                token = JsonConvert.DeserializeObject(Txt) as JObject;
+            }
+            else if (Txt.StartsWith("[") && Txt.EndsWith("]"))
+            {
+                token = JsonConvert.DeserializeObject(Txt) as JArray;
+            }
+            if (token != null)
             {
                 JsonParm jsonam = BaseParm.ConvertParm<JsonParm>(parm);
-                var tokens = jobj.SelectTokens(Jpath);
-                if(tokens?.Count()>0)
+                var tokens = token.SelectTokens(Jpath);
+                if (tokens?.Count() > 0)
                 {
                     list = (from a in tokens select Convert.ToString(a))?.ToList();
                 }
@@ -56,7 +83,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<string> Split(string Txt, string Reg)
+        public List<string> Split(string Txt, string Reg)
         {
             throw new System.NotImplementedException();
         }
