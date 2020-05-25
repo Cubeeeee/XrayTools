@@ -73,7 +73,7 @@ namespace Xray.Tools.ExtractLib.Extract
         /// <param name="path">正则、Xpath、Jpath表达式</param>
         /// <param name="parm">非通用化参数  例如正则的分组 Xpath的属性等</param>
         /// <returns>所有匹配的数据</returns>
-        public static IEnumerable<string> GetResults<T>(ExtractType extractType, string Txt, string path, T parm) where T : BaseParm
+        public static List<string> GetResults<T>(ExtractType extractType, string Txt, string path, T parm) where T : BaseParm
         {
             var et = typesdic[extractType];
             if (et != null)
@@ -109,7 +109,7 @@ namespace Xray.Tools.ExtractLib.Extract
         /// <param name="Txt">待匹配的文本</param>
         /// <param name="path">正则表达式</param>
         /// <returns>分割后的字符串集合</returns>
-        public static IEnumerable<string> Split(string Txt, string path, ExtractType extractType = ExtractType.Regex)
+        public static List<string> Split(string Txt, string path, ExtractType extractType = ExtractType.Regex)
         {
             List<String> list = new List<string>();
             if (extractType == ExtractType.Regex)
@@ -162,7 +162,7 @@ namespace Xray.Tools.ExtractLib.Extract
         /// <param name="Txt">待匹配的文本</param>
         /// <param name="path">正则、Xpath、Jpath表达式</param>
         /// <returns>匹配到的数据集合</returns>
-        public static IEnumerable<string> GetResults(ExtractType extractType, string Txt, string path) 
+        public static List<string> GetResults(ExtractType extractType, string Txt, string path) 
         {
             var et = typesdic[extractType];
             if (et != null)
