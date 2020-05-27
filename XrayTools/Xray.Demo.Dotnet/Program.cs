@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Xray.Tools.ExtractLib.Encode;
+using Xray.Tools.ExtractLib.Encode.Encoders;
 
 namespace Xray.Demo.Dotnet
 {
@@ -11,7 +13,8 @@ namespace Xray.Demo.Dotnet
     {
         static void Main(string[] args)
         {
-           
+            Console.ReadLine();
+
         }
     }
 }

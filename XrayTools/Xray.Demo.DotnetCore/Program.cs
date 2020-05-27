@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using Xray.Tools.ExtractLib.Encode;
 using Xray.Tools.ExtractLib.Encode.Encoders;
@@ -19,9 +20,6 @@ namespace Xray.Demo.DotnetCore
     {
         static void Main(string[] args)
         {
-            var json = File.ReadAllText("data.json");
-            var test = ExtractMethod.GetResults(ExtractType.Json, json, "[*].1");
-            //GetParmTest();
             ////使用正则表达式匹配多条结果 返回123,42
             //var regex_result =  ExtractMethod.GetResults(ExtractType.Regex,"xray123cube42","\\d+");
             ////使用jsonpath匹配单条结果 返回 1
@@ -41,10 +39,36 @@ namespace Xray.Demo.DotnetCore
             Console.ReadKey();
         }
 
-        private static void GetParmTest()
+
+        public static byte[] Hex2Byte(string byteStr)
         {
-            var dic = HttpMethod.GetParms("https://cn.bing.com/search?q=CSDN%E5%9B%BE%E6%A0%87&qs=n&form=QBRE&sp=-1&pq=csdntu%27b&sc=0-8&sk=&cvid=4D2266ACBA1548FF989E909540F7FB20", "pageId=38e0eb52e3eca460cc31b98a77fcce2e&s21=泰隆");
-            Console.WriteLine(String.Join("\n", from a in dic.Keys  select $"{a}={dic[a]}"));
+            try
+            {
+                byteStr = byteStr.ToUpper().Replace(" ", "");
+                int len = byteStr.Length / 2;
+                byte[] data = new byte[len];
+                for (int i = 0; i < len; i++)
+                {
+                    data[i] = Convert.ToByte(byteStr.Substring(i * 2, 2), 16);
+
+                }
+                return data;
+            }
+            catch (Exception ex)
+            {
+                return new byte[] { };
+            }
+        }
+        private static String GetRandom()
+        {
+            Random r = new Random();
+            String result = String.Empty;
+            const String text = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            for(int i = 0;i<16;i++)
+            {
+                result += text[r.Next(0, text.Length)];
+            }
+            return result;
         }
     }
 }
