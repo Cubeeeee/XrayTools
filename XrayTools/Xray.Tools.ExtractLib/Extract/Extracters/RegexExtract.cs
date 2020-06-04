@@ -52,7 +52,7 @@ namespace Xray.Tools.ExtractLib.Extract.Extracters
                     {
                         if (match?.Groups?.Count >= regexPam.Group)
                         {
-                            list.Add(reg.Match(Txt).Groups[regexPam.Group].Value);
+                            list.Add(match.Groups[regexPam.Group].Value);
                         }
                     }
                 }

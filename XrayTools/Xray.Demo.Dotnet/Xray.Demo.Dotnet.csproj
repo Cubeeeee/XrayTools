@@ -57,6 +57,10 @@
       <Project>{DEBF61A9-23E4-4BBF-A427-F55C91FA0087}</Project>
       <Name>Xray.Tools.ExtractLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Xray.Tools.HttpToolsLib\Xray.Tools.HttpToolsLib.csproj">
+      <Project>{5CF45210-5F2E-4218-BD59-AEE3F40BC369}</Project>
+      <Name>Xray.Tools.HttpToolsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

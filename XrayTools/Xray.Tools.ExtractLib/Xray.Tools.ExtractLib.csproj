@@ -10,12 +10,13 @@
     <PackageProjectUrl>http://gitlab.zcznb.top/XXY/xraytool/-/tree/master/XrayTools/Xray.Tools.ExtractLib</PackageProjectUrl>
     <RepositoryUrl>http://gitlab.zcznb.top/XXY/xraytool/-/tree/master/XrayTools/Xray.Tools.ExtractLib</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.4.7</Version>
+    <Version>1.0.4.8</Version>
     <Authors>nb-ray</Authors>
     <Company>nb-ray</Company>
     <PackageIconUrl>https://img-blog.csdnimg.cn/20190815154514477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI2NzEyOTc3,size_16,color_FFFFFF,t_70</PackageIconUrl>
     <Platforms>AnyCPU;x64</Platforms>
-    <FileVersion>1.0.4.7</FileVersion>
+    <FileVersion>1.0.4.8</FileVersion>
+    <AssemblyVersion>1.0.4.8</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
